@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": true,
+      "package": "com.treewhacksun.finv1"
     },
     "web": {
       "output": "static",
@@ -47,7 +48,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "9a202a6c-8801-4975-bce7-243412c51623b"
+        "projectId": "9a202a6c-8801-4975-bce7-243412c1623b"
       }
     }
   }
