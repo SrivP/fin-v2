@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
 export default function Add() {
   return (
@@ -10,9 +10,15 @@ export default function Add() {
       }}
     >
       <Text>Edit app/(tabs)/settings to edit this screen.</Text>
-
     </View>
   );
 }
 
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

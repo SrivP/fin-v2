@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function Settings() {
+export default function Transactions() {
   return (
     <View
       style={{
@@ -9,9 +9,7 @@ export default function Settings() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/(tabs)/settings to edit this screen.</Text>
-
+      <View></View>
     </View>
   );
 }
-

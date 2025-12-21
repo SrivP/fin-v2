@@ -1,100 +1,109 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
-import { View, Pressable, StyleSheet } from 'react-native';
-
+import { Tabs } from "expo-router";
+import { View, Pressable, StyleSheet } from "react-native";
+import HomeIcon from "../../components/svgs/homeIcon";
+import ChartIcon from "../../components/svgs/chartIcon";
+import AddIcon from "../../components/svgs/addIcon";
+import TransactionIcon from "../../components/svgs/transactionIcon";
+import CustomHeader from "@/components/customHeader";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarStyle: {
-            position: 'absolute',
-            backgroundColor: 'transparent',
-            borderTopWidth: 0,
-            elevation: 0,
-            height: 100,
-            bottom: 20,
-            flexDirection: 'row',
-            gap: 0
-          },
+        headerShown: true,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: "absolute",
+          backgroundColor: "transparent",
+          borderTopWidth: 0,
+          elevation: 0,
+          height: 100,
+          bottom: 10,
+          marginLeft: "20%",
+          width: "60%",
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           tabBarButton: (props) => (
-            <CustomTabButton {...props} iconName="home" />
+            <CustomTabButton {...props} Icon={HomeIcon} />
           ),
+          header: () => <CustomHeader title="Welcome Back, Sri!" />,
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="transactions"
         options={{
-          title: 'Settings',
+          title: "transactions",
           tabBarButton: (props) => (
-            <CustomTabButton {...props} iconName="cog" />
+            <CustomTabButton {...props} Icon={TransactionIcon} />
           ),
+          header: () => <CustomHeader title="Sorting through?" />,
         }}
       />
       <Tabs.Screen
-        name = "analytics"
+        name="analytics"
         options={{
-          title: 'analytics',
-          tabBarButton: ({props}) => (
-            <HomeIcon />
-          )
+          title: "analytics",
+          tabBarButton: (props) => (
+            <CustomTabButton {...props} Icon={ChartIcon} />
+          ),
+          header: () => <CustomHeader title="Charting the unexplored?" />,
         }}
-        />
+      />
       <Tabs.Screen
         name="add"
         options={{
-          title: 'add'
+          title: "add",
+          tabBarButton: (props) => (
+            <CustomTabButton {...props} Icon={AddIcon} />
+          ),
+          header: () => <CustomHeader title="Welcome Back, Sri!" />,
         }}
-        />
+      />
     </Tabs>
   );
 }
 
 // The Custom Button Component
-const CustomTabButton = ({ children, onPress, accessibilityState, iconName }) => {
+
+const CustomTabButton = ({ onPress, Icon }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <Pressable
         onPress={onPress}
-        style={[
-          styles.circle,
-          { backgroundColor: '#007AFF'}
-        ]}
+        style={[styles.circle, { backgroundColor: "#D9D9D9" }]}
       >
-        <FontAwesome 
-          name={iconName} 
-          size={24} 
-          color={'white'} 
-        />
+        <View
+          style={{
+            backgroundColor: "#fff",
+            width: "82%",
+            height: "82%",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon color={"white"} />
+        </View>
       </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   circle: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
 });
-
