@@ -9,10 +9,7 @@ export default function Analytics() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/(tabs)/settings to edit this screen.</Text>
-
+      <Text>Edit app/(tabs)/analytics to edit this screen.</Text>
     </View>
   );
 }
-
-

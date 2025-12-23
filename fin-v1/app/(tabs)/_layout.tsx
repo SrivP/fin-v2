@@ -1,70 +1,128 @@
 import { Tabs } from "expo-router";
-import { View, Pressable, StyleSheet } from "react-native";
+import { Alert, Modal, View, Pressable, StyleSheet, Text } from "react-native";
 import HomeIcon from "../../components/svgs/homeIcon";
 import ChartIcon from "../../components/svgs/chartIcon";
 import AddIcon from "../../components/svgs/addIcon";
 import TransactionIcon from "../../components/svgs/transactionIcon";
 import CustomHeader from "@/components/customHeader";
+import { useState } from "react";
+import { normalize } from "@/utils/normalize";
 
 export default function TabLayout() {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: true,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "transparent",
-          borderTopWidth: 0,
-          elevation: 0,
-          height: 100,
-          bottom: 10,
-          marginLeft: "20%",
-          width: "60%",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarButton: (props) => (
-            <CustomTabButton {...props} Icon={HomeIcon} />
-          ),
-          header: () => <CustomHeader title="Welcome Back, Sri!" />,
+    <>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
         }}
-      />
-      <Tabs.Screen
-        name="transactions"
-        options={{
-          title: "transactions",
-          tabBarButton: (props) => (
-            <CustomTabButton {...props} Icon={TransactionIcon} />
-          ),
-          header: () => <CustomHeader title="Sorting through?" />,
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Add Transaction</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Add Account</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Add Category</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Tabs
+        screenOptions={{
+          headerShown: true,
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            position: "absolute",
+            backgroundColor: "transparent",
+            borderTopWidth: 0,
+            elevation: 0,
+            height: 100,
+            bottom: 10,
+            marginLeft: "20%",
+            width: "60%",
+          },
         }}
-      />
-      <Tabs.Screen
-        name="analytics"
-        options={{
-          title: "analytics",
-          tabBarButton: (props) => (
-            <CustomTabButton {...props} Icon={ChartIcon} />
-          ),
-          header: () => <CustomHeader title="Charting the unexplored?" />,
-        }}
-      />
-      <Tabs.Screen
-        name="add"
-        options={{
-          title: "add",
-          tabBarButton: (props) => (
-            <CustomTabButton {...props} Icon={AddIcon} />
-          ),
-          header: () => <CustomHeader title="Welcome Back, Sri!" />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Home",
+            tabBarButton: (props) => (
+              <CustomTabButton
+                {...props}
+                Icon={HomeIcon}
+                onPress={props.onPress}
+              />
+            ),
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
+          }}
+        />
+        <Tabs.Screen
+          name="transactions"
+          options={{
+            title: "transactions",
+            tabBarButton: (props) => (
+              <CustomTabButton
+                {...props}
+                Icon={TransactionIcon}
+                onPress={props.onPress}
+              />
+            ),
+            header: () => <CustomHeader title="Sorting through?" />,
+          }}
+        />
+        <Tabs.Screen
+          name="analytics"
+          options={{
+            title: "analytics",
+            tabBarButton: (props) => (
+              <CustomTabButton
+                {...props}
+                Icon={ChartIcon}
+                onPress={props.onPress}
+              />
+            ),
+            header: () => <CustomHeader title="Charting the unexplored?" />,
+          }}
+        />
+        <Tabs.Screen
+          name="add"
+          options={{
+            tabBarButton: (props) => (
+              <CustomTabButton
+                {...props}
+                Icon={AddIcon}
+                onPress={() => setModalVisible(true)}
+              />
+            ),
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
+          }}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            tabBarItemStyle: { display: "none" },
+            headerShown: true,
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
 
@@ -105,5 +163,46 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 16,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2,
+    marginVertical: normalize(10),
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
