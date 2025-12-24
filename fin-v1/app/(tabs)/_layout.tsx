@@ -7,6 +7,7 @@ import TransactionIcon from "../../components/svgs/transactionIcon";
 import CustomHeader from "@/components/customHeader";
 import { useState } from "react";
 import { normalize } from "@/utils/normalize";
+import { router } from "expo-router";
 
 export default function TabLayout() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -24,19 +25,28 @@ export default function TabLayout() {
           <View style={styles.modalView}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                router.navigate("/(tabs)/addTransaction");
+              }}
             >
               <Text style={styles.textStyle}>Add Transaction</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                router.navigate("/(tabs)/addAccount");
+              }}
             >
               <Text style={styles.textStyle}>Add Account</Text>
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                router.navigate("/(tabs)/addCategory");
+              }}
             >
               <Text style={styles.textStyle}>Add Category</Text>
             </Pressable>
@@ -119,6 +129,31 @@ export default function TabLayout() {
           options={{
             tabBarItemStyle: { display: "none" },
             headerShown: true,
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
+          }}
+        />
+        <Tabs.Screen
+          name="addTransaction"
+          options={{
+            tabBarItemStyle: { display: "none" },
+            headerShown: true,
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
+          }}
+        />
+        <Tabs.Screen
+          name="addAccount"
+          options={{
+            tabBarItemStyle: { display: "none" },
+            headerShown: true,
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
+          }}
+        />
+        <Tabs.Screen
+          name="addCategory"
+          options={{
+            tabBarItemStyle: { display: "none" },
+            headerShown: true,
+            header: () => <CustomHeader title="Welcome Back, Sri!" />,
           }}
         />
       </Tabs>
