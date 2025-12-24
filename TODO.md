@@ -12,4 +12,8 @@
   - Car blur animation?
   - Card switch animation
   - Page swipe transition
-  - Settings page
+- Settings page
+
+```bash
+$ adb -s <device name> reverse tcp:8081 tcp:8081
+```
